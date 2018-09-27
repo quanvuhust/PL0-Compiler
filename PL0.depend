@@ -1,0 +1,70 @@
+# depslib dependency file v1.0
+1537452847 source:e:\onedrive - hanoi university of science and technology\document\it4079\khmt\code\pl0\semanticanalyzer.cpp
+	"SemanticAnalyzer.h"
+
+1537452847 nalyzer.h"
+
+1537452839 e:\onedrive - hanoi university of science and technology\document\it4079\khmt\code\pl0\semanticanalyzer.h
+
+1537452765 source:e:\onedrive - hanoi university of science and technology\document\it4079\khmt\code\pl0\syntaxanalyzer.cpp
+	"SyntaxAnalyzer.h"
+
+1537452765 lyzer.h"
+
+1537452758 e:\onedrive - hanoi university of science and technology\document\it4079\khmt\code\pl0\syntaxanalyzer.h
+
+1537618368 source:e:\onedrive - hanoi university of science and technology\document\it4079\khmt\code\pl0\main.cpp
+	<iostream>
+	"LexicalAnalyzer.h"
+
+1537618368 alyzer.h"
+
+1537618620 source:e:\onedrive - hanoi university of science and technology\document\it4079\khmt\code\pl0\lexicalanalyzer.cpp
+	"LexicalAnalyzer.h"
+	<iostream>
+	<cctype>
+	<unordered_map>
+	<string>
+	<algorithm>
+
+1537618620 >
+
+1537614210 e:\onedrive - hanoi university of science and technology\document\it4079\khmt\code\pl0\lexicalanalyzer.h
+	<cstdio>
+	<vector>
+
+1537614210 
+
+1537963489 source:/media/ubuntu/01D1E01A0B980A20/OneDrive - Hanoi University of Science and Technology/Document/IT4079/KHMT/Code/PL0/LexicalAnalyzer.cpp
+	"LexicalAnalyzer.h"
+	<iostream>
+	<cctype>
+	<unordered_map>
+	<string>
+	<algorithm>
+
+1537963093 /media/ubuntu/01D1E01A0B980A20/OneDrive - Hanoi University of Science and Technology/Document/IT4079/KHMT/Code/PL0/LexicalAnalyzer.h
+	<cstdio>
+	<vector>
+
+1537452847 source:/media/ubuntu/01D1E01A0B980A20/OneDrive - Hanoi University of Science and Technology/Document/IT4079/KHMT/Code/PL0/SemanticAnalyzer.cpp
+	"SemanticAnalyzer.h"
+
+1537622380 /media/ubuntu/01D1E01A0B980A20/OneDrive - Hanoi University of Science and Technology/Document/IT4079/KHMT/Code/PL0/SemanticAnalyzer.h
+
+1537963511 source:/media/ubuntu/01D1E01A0B980A20/OneDrive - Hanoi University of Science and Technology/Document/IT4079/KHMT/Code/PL0/Main.cpp
+	<iostream>
+	<unordered_map>
+	"LexicalAnalyzer.h"
+	"SyntaxAnalyzer.h"
+
+1537953218 /media/ubuntu/01D1E01A0B980A20/OneDrive - Hanoi University of Science and Technology/Document/IT4079/KHMT/Code/PL0/SyntaxAnalyzer.h
+	"LexicalAnalyzer.h"
+
+1537963857 source:/media/ubuntu/01D1E01A0B980A20/OneDrive - Hanoi University of Science and Technology/Document/IT4079/KHMT/Code/PL0/SyntaxAnalyzer.cpp
+	"SyntaxAnalyzer.h"
+	"LexicalAnalyzer.h"
+	<iostream>
+	<set>
+	<unordered_map>
+
