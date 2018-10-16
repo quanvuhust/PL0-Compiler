@@ -2,11 +2,10 @@
 #include <iostream>
 #include <cctype>
 #include <unordered_map>
-#include <string>
 #include <algorithm>
 
 using namespace std;
-extern int flagError;
+extern Flag flag;
 
 long LexicalAnalyzer::getLine(void)
 {
@@ -16,6 +15,14 @@ long LexicalAnalyzer::getLine(void)
 bool LexicalAnalyzer::hasNextToken()
 {
     return !eofFlag;
+}
+
+string* LexicalAnalyzer::getIdent() {
+    return new string(ide.begin(), ide.end());
+}
+
+NumberType LexicalAnalyzer::getNumber() {
+    return stoi(string(num.begin(), num.end()));
 }
 
 void LexicalAnalyzer::reset(void)
@@ -167,6 +174,6 @@ unsigned char LexicalAnalyzer::getNextState5()
 
 void LexicalAnalyzer::error(const char* msg)
 {
-    flagError++;
+    flag.numError++;
     cerr << "Line " << getLine() << ": " << msg << endl;
 }

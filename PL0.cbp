@@ -35,6 +35,8 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="LexicalAnalyzer.h" />
+		<Unit filename="Library.cpp" />
+		<Unit filename="Library.h" />
 		<Unit filename="Main.cpp">
 			<Option compilerVar="CC" />
 		</Unit>

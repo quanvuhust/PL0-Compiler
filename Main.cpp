@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int flagError = 0;
+Flag flag;
 
 int main(int argc, char* argv[]) {
     FILE *input = NULL;
@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
     fclose(input);
     */
     input = fopen("./test.txt", "rt");
-    unordered_map<int, char*> ma = {
+    unordered_map<int, const char*> ma = {
 	{0, "NONE"}, {1, "IDENT"}, {2, "NUMBER"},
 	{3, "BEGIN"}, {4, "CALL"}, {5, "CONST"}, {6, "DO"},  {7, "ELSE"}, {8, "END"}, {9, "FOR"}, {10, "IF"}, {11, "ODD"},
 	{12, "PROCEDURE"}, {13, "PROGRAM"}, {14, "THEN"}, {15, "TO"}, {16, "VAR"}, {17, "WHILE"},{18, "PLUS"}, {19, "MINUS"},

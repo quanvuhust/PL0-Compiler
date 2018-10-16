@@ -3,6 +3,8 @@
 
 #include <cstdio>
 #include <vector>
+#include <string>
+#include <memory>
 
 using namespace std;
 
@@ -14,6 +16,14 @@ typedef enum {
 	TIMES, SLASH, EQU, NEQ, LSS, LEQ, GTR, GEQ, LPARENT,
 	RPARENT, LBRACK, RBRACK, PERIOD, COMMA, SEMICOLON,  ASSIGN, PERCENT
 } TokenType;
+
+typedef int NumberType;
+
+class Flag {
+    public:
+    int numError = 0;
+    bool printError = true;
+};
 
 class LexicalAnalyzer {
 private:
@@ -55,6 +65,8 @@ public:
     TokenType getNextToken();
     bool hasNextToken();
     long getLine(void);
+    string* getIdent();
+    NumberType getNumber();
 };
 
 
