@@ -1,38 +1,47 @@
 #ifndef SEMANTIC_ANALYZER
 #define SEMANTIC_ANALYZER 0
 #include <unordered_map>
+#include <iostream>
 #include <string>
 #include "LexicalAnalyzer.h"
-#include "Library.h"
 
-typedef int ObjectType;
+typedef char ObjectType;
 
 class Object
 {
-    public:
+public:
     static const ObjectType CONST=0, VARIABLE=1, PROCEDURE=2, ARRAY=3;
 };
 
 class Entry
 {
-    public:
+public:
     ObjectType kind;
+};
+
+
+struct Addr {
+    int base;
+    int offset; // Not use
 };
 
 class ConstEntry:public Entry
 {
-    public:
+public:
     int val;
 };
 
 class VarEntry:public Entry
 {
-    public:
+public:
+    bool PassByValue = true;
+    Addr addr;
 };
 
 class ArrayEntry:public Entry
 {
-    public:
+public:
+    Addr addr;
     int len;
 };
 
@@ -53,10 +62,14 @@ public:
 
 class SymbolTable
 {
-    public:
+public:
+    int width = 0;
     SymbolTable *parent = nullptr;
     std::unordered_map<std::string*, void*, myhash, myequal> table;
-    void removeAllEntry(void) {
+
+    ~SymbolTable()
+    {
+        cout << "Destructor" << endl;
         for (auto& it: table) {
             delete it.first;
             delete it.second;
@@ -66,26 +79,40 @@ class SymbolTable
 
 class ProcEntry:public Entry
 {
-    public:
+public:
     SymbolTable *childProc;
     int argc;
-    vector<string*> argv;
+    int base;
+    int address;
+    // Tham bien: true
+    // Tham tri: false
+    vector<bool> argv;
 };
 
 class SemanticAnalyzer
 {
+private:
+    unordered_map<int, const char*> errorString = {{25, "Redeclaration of "},
+        {26, "\' was not declared in this scope"}, {27, "Must be a variable."}, {28, "lvalue is not procedure."},
+        {29, "Procedure cannot be in Expression."}, {30, "Const array variable cannot assign."},
+        {31, "Missing argument of procedure: "}, {32, "Too many argument of procedure: "},
+        {33, "Variable cannot be referenced by index array"}, {34, "\' is a built-in function"},
+        {35, "Missing array index"}, {36, "Tham bien phai la bien hoac mang."}
+    };
 public:
     bool checkIdent(SymbolTable *table, std::string* name);
     void* getEntry(SymbolTable *table, std::string* name);
     SymbolTable* mktable(SymbolTable *prevTable);
 
-    SymbolTable* enterProc(std::string* name, SymbolTable *table);
+    SymbolTable* enterProc(std::string* name, int base, SymbolTable *table);
     void enterConst(std::string* name, SymbolTable *table, NumberType val);
-    void enterVar(std::string* name, SymbolTable *table);
-    void enterArray(std::string* name, SymbolTable *table, int len);
+    void enterVar(std::string* name, Addr addr, SymbolTable *table);
+    void enterVar(std::string* name, Addr addr, bool passBy, SymbolTable *table);
+    void enterArray(std::string* name, Addr addr, SymbolTable *table, int len);
 
-    void setParameterProc(SymbolTable *table, string *nameProc, int argc, vector<string*> &argv);
+    void setParameterProc(SymbolTable *table, string *nameProc, int argc, vector<bool> &argv, int address);
     int checkParameterProc(SymbolTable *table, string *nameProc, int argc);
+    void error(int errorCode, string name="");
 };
 
 #endif // SEMANTIC_ANALYZER

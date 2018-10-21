@@ -1,6 +1,19 @@
 #include "SemanticAnalyzer.h"
+#include "Parser.h"
+
 #include <iostream>
 #include <cassert>
+
+void SemanticAnalyzer::error(int errorCode, string name)
+{
+    if(errorCode == 26) {
+        cerr << "\'" << name << errorString[errorCode] << endl;
+    } else if(errorCode == 34) {
+        cerr << "\'" << name << errorString[errorCode] << endl;
+    } else {
+        cerr << errorString[errorCode] << name << endl;
+    }
+}
 
 bool SemanticAnalyzer::checkIdent(SymbolTable *table, string* name)
 {
@@ -21,24 +34,39 @@ void SemanticAnalyzer::enterConst(string* name, SymbolTable *table, NumberType v
     table->table.insert({name, entry});
 }
 
-void SemanticAnalyzer::enterVar(string* name, SymbolTable *table)
+void SemanticAnalyzer::enterVar(string* name, Addr addr, SymbolTable *table)
 {
     assert(table != nullptr);
     VarEntry *entry = new VarEntry();
     entry->kind = Object::VARIABLE;
+    entry->addr = addr;
     table->table.insert({name, entry});
+    table->width += 1;
 }
 
-void SemanticAnalyzer::enterArray(std::string* name, SymbolTable *table, int len)
+void SemanticAnalyzer::enterVar(std::string* name, Addr addr, bool passBy, SymbolTable *table)
+{
+    assert(table != nullptr);
+    VarEntry *entry = new VarEntry();
+    entry->kind = Object::VARIABLE;
+    entry->addr = addr;
+    entry->PassByValue = passBy;
+    table->table.insert({name, entry});
+    table->width += 1;
+}
+
+void SemanticAnalyzer::enterArray(std::string* name, Addr addr, SymbolTable *table, int len)
 {
     assert(table != nullptr);
     ArrayEntry *entry = new ArrayEntry();
     entry->kind = Object::ARRAY;
+    entry->addr = addr;
     entry->len = len;
     table->table.insert({name, entry});
+    table->width += len;
 }
 
-SymbolTable* SemanticAnalyzer::enterProc(string* name, SymbolTable *table)
+SymbolTable* SemanticAnalyzer::enterProc(string* name, int base, SymbolTable *table)
 {
     assert(table != nullptr);
     SymbolTable *newTable = new SymbolTable();
@@ -48,29 +76,29 @@ SymbolTable* SemanticAnalyzer::enterProc(string* name, SymbolTable *table)
     ProcEntry *entry = new ProcEntry();
     entry->childProc = newTable;
     entry->kind = Object::PROCEDURE;
+    entry->base = base;
     table->table.insert({name, entry});
     return newTable;
 }
 
 void* SemanticAnalyzer::getEntry(SymbolTable *table, string* name)
 {
-    if(table == nullptr) {
-        return nullptr;
+    while(table != nullptr) {
+        if(table->table.find(name) != table->table.end()) {
+            return table->table[name];
+        }
+        table = table->parent;
     }
-
-    if(table->table.find(name) != table->table.end()) {
-        return table->table[name];
-    }
-
-    return getEntry(table->parent, name);
+    return nullptr;
 }
 
-void SemanticAnalyzer::setParameterProc(SymbolTable *table, string *nameProc, int argc, vector<string*> &argv)
+void SemanticAnalyzer::setParameterProc(SymbolTable *table, string *nameProc, int argc, vector<bool> &argv, int address)
 {
     ProcEntry* entry = (ProcEntry*)getEntry(table, nameProc);
     if(entry != nullptr) {
         entry->argc = argc;
         entry->argv = argv;
+        entry->address = address;
     }
 }
 

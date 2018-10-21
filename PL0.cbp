@@ -13,6 +13,8 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
+					<Add directory="./" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +24,8 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -31,23 +35,27 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="CodeGenerator.cpp" />
+		<Unit filename="CodeGenerator.h" />
 		<Unit filename="LexicalAnalyzer.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="LexicalAnalyzer.h" />
 		<Unit filename="Library.cpp" />
 		<Unit filename="Library.h" />
-		<Unit filename="Main.cpp">
+		<Unit filename="Main.cpp" />
+		<Unit filename="Parser.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Parser.h" />
 		<Unit filename="SemanticAnalyzer.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="SemanticAnalyzer.h" />
-		<Unit filename="SyntaxAnalyzer.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="SyntaxAnalyzer.cpp" />
 		<Unit filename="SyntaxAnalyzer.h" />
+		<Unit filename="VM.cpp" />
+		<Unit filename="VM.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

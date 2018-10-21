@@ -1,0 +1,83 @@
+j 6
+int 5
+lv 0, 4
+lc 100
+st
+ep
+int 11
+lc 3
+odd
+fj 19
+j 15
+int 5
+wri
+wln
+ep
+int 4
+lc 3
+dct 5
+call 0, 11
+la 0, 5
+cv
+lc 0
+st
+cv
+li
+lc 5
+lc 1
+sub
+le
+fj 47
+j 34
+int 5
+ri
+ep
+int 4
+la 0, 0
+lv 0, 5
+add
+dct 5
+call 0, 31
+cv
+cv
+li
+lc 1
+add
+st
+j 23
+dct 1
+int 4
+la 0, 6
+dct 5
+call 0, 1
+int 4
+lv 0, 6
+dct 5
+call 0, 11
+la 0, 5
+cv
+lc 0
+st
+cv
+li
+lc 5
+lc 1
+sub
+le
+fj 81
+int 4
+la 0, 0
+lv 0, 5
+add
+li
+dct 5
+call 0, 11
+cv
+cv
+li
+lc 1
+add
+st
+j 60
+dct 1
+hlt

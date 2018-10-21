@@ -1,0 +1,11 @@
+Program Example0; 
+CONST N = 5;
+Var a[5], i;
+
+Begin  
+	For i:=0 To N Do
+		Call Readln(a[i]);
+
+	For i:=0 To N Do
+		Call Writeln(a[i]);
+End.

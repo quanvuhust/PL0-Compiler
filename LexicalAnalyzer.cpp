@@ -7,6 +7,11 @@
 using namespace std;
 extern Flag flag;
 
+void LexicalAnalyzer::setFile(FILE *f)
+{
+    this->f = f;
+}
+
 long LexicalAnalyzer::getLine(void)
 {
     return line;
@@ -18,6 +23,10 @@ bool LexicalAnalyzer::hasNextToken()
 }
 
 string* LexicalAnalyzer::getIdent() {
+    int n = ide.size();
+    for(int i =0; i < n; i++) {
+        ide[i] = tolower(ide[i]);
+    }
     return new string(ide.begin(), ide.end());
 }
 

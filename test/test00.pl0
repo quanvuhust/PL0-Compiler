@@ -1,0 +1,22 @@
+Program Example0; 
+CONST N = 5;
+Var a[5], i, b;
+
+Procedure Test(Var a);
+	Begin
+		a := 100;
+	End;
+
+Begin  
+	If odd 3 Then
+		Call Writeln(3);
+
+	For i:=0 To N-1 Do
+		Call Readln(a[i]);
+
+	Call Test(b);
+    Call Writeln(b);
+
+    For i:=0 To N-1 Do
+        Call Writeln(a[i]);
+End.

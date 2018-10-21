@@ -61,15 +61,12 @@ private:
         state = (this->*nextState[state])();
     }
 public:
-    LexicalAnalyzer(FILE *f):f(f) {}
     TokenType getNextToken();
     bool hasNextToken();
     long getLine(void);
     string* getIdent();
     NumberType getNumber();
+    void setFile(FILE *f);
 };
-
-
-
 
 #endif // LEXICAL_ANALYZER

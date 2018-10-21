@@ -1,0 +1,9 @@
+Program Example2; 
+Var a;
+Procedure gcd(b);  
+    Begin    
+       a := b;
+    End;
+Begin
+    Call gcd(12);
+End. 
