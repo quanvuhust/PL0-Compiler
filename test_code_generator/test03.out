@@ -1,0 +1,41 @@
+j 18
+int 5
+lv 0, 4
+li
+lc 10
+le
+fj 17
+lv 0, 4
+lv 0, 4
+li
+lc 1
+add
+st
+int 4
+lv 0, 4
+dct 5
+call 1, 1
+ep
+int 5
+j 23
+int 5
+ri
+ep
+int 4
+la 0, 0
+dct 5
+call 0, 20
+int 4
+la 0, 0
+dct 5
+call 0, 1
+j 36
+int 5
+wri
+wln
+ep
+int 4
+lv 0, 0
+dct 5
+call 0, 32
+hlt

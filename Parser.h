@@ -1,16 +1,12 @@
 #ifndef PARSER_H
 #define PARSER_H 1
 
-#include "Parser.h"
-
 #include "LexicalAnalyzer.h"
 #include "SyntaxAnalyzer.h"
 #include "SemanticAnalyzer.h"
 
 #include "Library.h"
 #include "CodeGenerator.h"
-
-
 
 class Parser{
 private:
@@ -37,7 +33,7 @@ private:
 
     void callProc();
     void assignVariable();
-    void checkFactor();
+    void checkRValue();
     void loadOldTable();
 
     void nextToken(void);
@@ -49,7 +45,7 @@ private:
     void block(void);
     void program(void);
 public:
-    void parse(char* fileName);
+    int parse(char* fileName);
 };
 
 #endif // PARSER_H

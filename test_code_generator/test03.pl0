@@ -1,0 +1,16 @@
+Program TestRecur;
+Var n;
+
+Procedure r(Var n);
+	Begin
+		if n <= 10 then
+			Begin
+				n := n + 1;
+				Call r(n);
+			End;
+	End;
+Begin
+	Call Readln(n);
+	Call r(n);
+    Call Writeln(n);
+End.

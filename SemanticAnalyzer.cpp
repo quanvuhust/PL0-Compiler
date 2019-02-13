@@ -6,9 +6,7 @@
 
 void SemanticAnalyzer::error(int errorCode, string name)
 {
-    if(errorCode == 26) {
-        cerr << "\'" << name << errorString[errorCode] << endl;
-    } else if(errorCode == 34) {
+    if(errorCode == 26 || errorCode == 34 || errorCode == 37) {
         cerr << "\'" << name << errorString[errorCode] << endl;
     } else {
         cerr << errorString[errorCode] << name << endl;
@@ -77,6 +75,9 @@ SymbolTable* SemanticAnalyzer::enterProc(string* name, int base, SymbolTable *ta
     entry->childProc = newTable;
     entry->kind = Object::PROCEDURE;
     entry->base = base;
+    if(table->table.find(name) != table->table.end()) {
+        table->table.erase(name);
+    }
     table->table.insert({name, entry});
     return newTable;
 }

@@ -1,0 +1,39 @@
+int 8
+la 0, 1
+lc 1
+add
+lc 3
+st
+la 0, 3
+lc 4
+st
+la 0, 0
+la 0, 1
+lc 1
+add
+li
+lc 4
+mul
+neg
+lc 6
+lc 5
+mod
+neg
+add
+lv 0, 3
+lc 2
+div
+lc 5
+sub
+sub
+st
+j 34
+int 5
+wri
+wln
+ep
+int 4
+lv 0, 0
+dct 5
+call 0, 30
+hlt

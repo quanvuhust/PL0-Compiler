@@ -1,0 +1,17 @@
+Program TestCondi;
+
+Begin
+	if 1 > 0 then Call Writeln(1);
+	if 0 < 1 then Call Writeln(2);
+	if 0 <= 0 then Call Writeln(3);
+	if 0 >= 0 then Call Writeln(4);
+	if 0 <> 1 then Call Writeln(5);
+	if 0 = 0 then Call Writeln(6);
+	if odd 3 then Call Writeln(7);
+	if 0 <= 1 then Call Writeln(8);
+	if 1 >= 0 then Call Writeln(9);
+End.
+
+
+
+.

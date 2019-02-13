@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 #include <memory>
-
+#define MAX_BUFFER 1024
 using namespace std;
 
 //Các loại Token được sử dụng trong PL/0
@@ -14,7 +14,7 @@ typedef enum {
 	BEGIN, CALL, CONST, DO,  ELSE, END, FOR, IF, ODD,
 	PROCEDURE, PROGRAM, THEN, TO, VAR, WHILE,PLUS, MINUS,
 	TIMES, SLASH, EQU, NEQ, LSS, LEQ, GTR, GEQ, LPARENT,
-	RPARENT, LBRACK, RBRACK, PERIOD, COMMA, SEMICOLON,  ASSIGN, PERCENT
+	RPARENT, LBRACK, RBRACK, PERIOD, COMMA, SEMICOLON,  ASSIGN, PERCENT, START
 } TokenType;
 
 typedef int NumberType;
@@ -22,7 +22,6 @@ typedef int NumberType;
 class Flag {
     public:
     int numError = 0;
-    bool printError = true;
 };
 
 class LexicalAnalyzer {
@@ -31,11 +30,13 @@ private:
     unsigned char state = 0;
     const int MAX_IDENT_LEN = 10;
     const int MAX_NUMBER_LEN = 6;
-    bool eofFlag = false;
     bool noReadMore = false;
     vector<char> ide;
     vector<char> num;
-    TokenType token;
+    char buffer[MAX_BUFFER + 1];
+    int lenBuffer = 0;
+    int first = 0;
+    TokenType token = START;
     FILE *f = NULL;
     long line = 0;
     char c;
@@ -55,7 +56,7 @@ private:
 
     void error(const char* msg);
     void reset(void);
-    bool getCh(void);
+    void getCh(void);
 
     void next() {
         state = (this->*nextState[state])();
@@ -66,7 +67,7 @@ public:
     long getLine(void);
     string* getIdent();
     NumberType getNumber();
-    void setFile(FILE *f);
+    void init(FILE *f);
 };
 
 #endif // LEXICAL_ANALYZER

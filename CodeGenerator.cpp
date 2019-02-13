@@ -7,7 +7,7 @@ CodeGenerator::CodeGenerator()
 {
 }
 
-int CodeGenerator::lvalue(VarEntry* entry, int base)
+void CodeGenerator::rvalue(VarEntry* entry, int base)
 {
     Addr addr = entry->addr;
     if(entry->PassByValue) {
@@ -15,6 +15,16 @@ int CodeGenerator::lvalue(VarEntry* entry, int base)
     } else {
         gen(OP_LV, base - addr.base, addr.offset);
         gen(OP_LI);
+    }
+}
+
+void CodeGenerator::lvalue(VarEntry* entry, int base)
+{
+    Addr addr = entry->addr;
+    if (entry->PassByValue) {
+        gen(OP_LA, base - addr.base, addr.offset);
+    } else {
+        gen(OP_LV, base - addr.base, addr.offset);
     }
 }
 

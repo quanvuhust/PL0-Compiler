@@ -22,7 +22,7 @@ public:
 
 struct Addr {
     int base;
-    int offset; // Not use
+    int offset;
 };
 
 class ConstEntry:public Entry
@@ -43,6 +43,18 @@ class ArrayEntry:public Entry
 public:
     Addr addr;
     int len;
+};
+
+class ProcEntry:public Entry
+{
+public:
+    void *childProc;
+    int argc;
+    int base;
+    int address;
+    // Tham bien: true
+    // Tham tri: false
+    vector<bool> argv;
 };
 
 struct myhash {
@@ -69,35 +81,32 @@ public:
 
     ~SymbolTable()
     {
-        cout << "Destructor" << endl;
         for (auto& it: table) {
             delete it.first;
-            delete it.second;
+            ObjectType kind = ((Entry*)it.second)->kind;
+            if(kind == Object::ARRAY) {
+                delete (ArrayEntry*) it.second;
+            } else if(kind == Object::VARIABLE) {
+                delete (VarEntry*) it.second;
+            } else if(kind == Object::CONST) {
+                delete (ConstEntry*) it.second;
+            } else if(kind == Object::PROCEDURE) {
+                delete (ProcEntry*) it.second;
+            }
         }
     }
-};
-
-class ProcEntry:public Entry
-{
-public:
-    SymbolTable *childProc;
-    int argc;
-    int base;
-    int address;
-    // Tham bien: true
-    // Tham tri: false
-    vector<bool> argv;
 };
 
 class SemanticAnalyzer
 {
 private:
     unordered_map<int, const char*> errorString = {{25, "Redeclaration of "},
-        {26, "\' was not declared in this scope"}, {27, "Must be a variable."}, {28, "lvalue is not procedure."},
-        {29, "Procedure cannot be in Expression."}, {30, "Const array variable cannot assign."},
+        {26, "\' was not declared in this scope"}, {27, "CONST can not be assigned."}, {28, "PROCEDURE can not be assigned."},
+        {29, "Procedure cannot be in Expression."}, {30, "Const ARRAY variable can not be assigned."},
         {31, "Missing argument of procedure: "}, {32, "Too many argument of procedure: "},
-        {33, "Variable cannot be referenced by index array"}, {34, "\' is a built-in function"},
-        {35, "Missing array index"}, {36, "Tham bien phai la bien hoac mang."}
+        {33, "VARIABLE or CONST cannot be referenced by index array"}, {34, "\' is a built-in function"},
+        {35, "Missing array index"}, {36, "Tham bien khong the la hang so, thu tuc hoac bi de trong"}, {37, "\' is not a PROCEDURE"}, 
+        {38, "IDENT in FOR loop must be a VARIABLE."}, {39, "Tham bien khong the bi de trong."}
     };
 public:
     bool checkIdent(SymbolTable *table, std::string* name);

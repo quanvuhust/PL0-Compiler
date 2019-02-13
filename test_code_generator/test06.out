@@ -1,0 +1,77 @@
+lc 1
+lc 0
+gt
+fj 13
+j 9
+int 5
+wri
+wln
+ep
+int 4
+lc 1
+dct 5
+call 0, 5
+lc 0
+lc 1
+lt
+fj 21
+int 4
+lc 2
+dct 5
+call 0, 5
+lc 0
+lc 0
+le
+fj 29
+int 4
+lc 3
+dct 5
+call 0, 5
+lc 0
+lc 0
+ge
+fj 37
+int 4
+lc 4
+dct 5
+call 0, 5
+lc 0
+lc 1
+ne
+fj 45
+int 4
+lc 5
+dct 5
+call 0, 5
+lc 0
+lc 0
+eq
+fj 53
+int 4
+lc 6
+dct 5
+call 0, 5
+lc 3
+odd
+fj 60
+int 4
+lc 7
+dct 5
+call 0, 5
+lc 0
+lc 1
+le
+fj 68
+int 4
+lc 8
+dct 5
+call 0, 5
+lc 1
+lc 0
+ge
+fj 76
+int 4
+lc 9
+dct 5
+call 0, 5
+hlt

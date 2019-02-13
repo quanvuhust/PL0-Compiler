@@ -1,0 +1,14 @@
+Program TestExpr;
+Const n = 9;
+Var a,b[2],c;
+
+Begin
+	b[1] := 3;
+	c := 4;
+	a := -(b[1] * 4) + (-6%5) -(+ c/2-5);
+	Call Writeln(a);
+End.
+
+
+
+.

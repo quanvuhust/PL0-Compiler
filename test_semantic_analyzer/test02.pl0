@@ -1,0 +1,53 @@
+Program Example1;
+Const n = 9;
+Var a,b,c,d[9],i;
+
+Procedure test01(a; b; var d);
+	Const n = 3;
+	Var c;
+	Procedure decA(var a);  
+		Var c;
+		Begin
+			c := 1;
+			a := a - c
+		End;
+	Procedure gcd(a; b; var d);  
+		Procedure decB(var b);  
+			Begin
+				c := 2;
+				b := b - c
+			End;
+		Begin
+			Call decA(a);
+			Call decB(b);
+			a := a - c;
+			a := a + 2;
+			b := b - n;
+			b := b + 3;
+			While a <> b do
+				if a > b then a := a - b
+				else b := b - a;	
+			d := b
+		End;
+	Begin
+		Call gcd(a, b, d)
+	End;
+Begin
+	Call Readln(a);  Call Readln (b);
+	Begin 
+		a := a + 1;
+		b := b + 2;
+	End;
+	n := 3;
+	Call test01(a,b,c);
+	Call Writeln(c);
+	For i:=0 To n-1 Do
+		d[(2 - 2) + i] := n - i;
+
+    For i:=0 To n-1 Do
+        Call Writeln(d[i]);
+End.
+
+
+
+.

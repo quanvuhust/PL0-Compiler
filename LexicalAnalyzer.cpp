@@ -3,11 +3,12 @@
 #include <cctype>
 #include <unordered_map>
 #include <algorithm>
+#include <cstring>
 
 using namespace std;
 extern Flag flag;
 
-void LexicalAnalyzer::setFile(FILE *f)
+void LexicalAnalyzer::init(FILE *f)
 {
     this->f = f;
 }
@@ -19,19 +20,15 @@ long LexicalAnalyzer::getLine(void)
 
 bool LexicalAnalyzer::hasNextToken()
 {
-    return !eofFlag;
+    return this->token != NONE;
 }
 
 string* LexicalAnalyzer::getIdent() {
-    int n = ide.size();
-    for(int i =0; i < n; i++) {
-        ide[i] = tolower(ide[i]);
-    }
     return new string(ide.begin(), ide.end());
 }
 
 NumberType LexicalAnalyzer::getNumber() {
-    return stoi(string(num.begin(), num.end()));
+    return atoi(string(num.begin(), num.end()).c_str());
 }
 
 void LexicalAnalyzer::reset(void)
@@ -41,18 +38,22 @@ void LexicalAnalyzer::reset(void)
     state = 0;
 }
 
-bool LexicalAnalyzer::getCh(void)
+void LexicalAnalyzer::getCh(void)
 {
     if(!noReadMore) {
-        c = fgetc(f);
-        if(c == '\n') {
+        if(lenBuffer == first) {
             line++;
+            first = 0;
+            if(fgets(buffer, MAX_BUFFER, f) != NULL) {
+                lenBuffer = strlen(buffer);
+                if(feof(f)) {
+                    buffer[lenBuffer++] = -1;
+                }
+            } else {
+                buffer[0] = -1;
+            }
         }
-        if(c == -1) {
-            eofFlag = true;
-            return 1;
-        }
-        return 0;
+        c = buffer[first++];
     } else {
         noReadMore = false;
     }
@@ -61,13 +62,13 @@ bool LexicalAnalyzer::getCh(void)
 TokenType LexicalAnalyzer::getNextToken()
 {
     reset();
-    while(!getCh()) {
+    while(1) {
+        getCh();
         next();
         if(this->state == ENDSTATE) {
             return this->token;
         }
     }
-    return NONE;
 }
 
 unsigned char LexicalAnalyzer::getNextState0()
@@ -82,7 +83,7 @@ unsigned char LexicalAnalyzer::getNextState0()
     };
 
     if(isalpha(c)) {
-        ide.emplace_back(c);
+        ide.emplace_back(tolower(c));
         return 1;
     } else if(isdigit(c)) {
         num.emplace_back(c);
@@ -94,10 +95,12 @@ unsigned char LexicalAnalyzer::getNextState0()
         return ENDSTATE;
     } else if(DOUBLE_SYMBOL.find(c) != DOUBLE_SYMBOL.end()) {
         return DOUBLE_SYMBOL.at(c);
-    } else {
-        error("Invalid symbols.");
+    } else if(c == -1) {
         this->token = NONE;
         return ENDSTATE;
+    } else {
+        error("Invalid symbols.");
+        return 0;
     }
 
 }
@@ -111,16 +114,17 @@ unsigned char LexicalAnalyzer::getNextState1()
     };
 
     if(isalpha(c) || isdigit(c)) {
-        if(ide.size() <= MAX_IDENT_LEN + 1)
-            ide.emplace_back(c);
+        if(ide.size() < MAX_IDENT_LEN + 1) {
+            ide.emplace_back(tolower(c));
+        }
 
         return 1;
     } else {
         if(ide.size() == MAX_IDENT_LEN + 1) {
             error("Error 1: Name too long.");
+            ide.pop_back();
         }
         string lexeme(ide.begin(), ide.end());
-        transform(lexeme.begin(), lexeme.end(), lexeme.begin(), ::tolower);
         if(RESERVED_WORDS.find(lexeme) != RESERVED_WORDS.end())
             this->token = RESERVED_WORDS.at(lexeme);
         else
@@ -133,13 +137,14 @@ unsigned char LexicalAnalyzer::getNextState1()
 unsigned char LexicalAnalyzer::getNextState2()
 {
     if(isdigit(c)) {
-        if(num.size() <= MAX_NUMBER_LEN + 1)
+        if(num.size() < MAX_NUMBER_LEN + 1)
             num.emplace_back(c);
 
         return 2;
     } else {
         if(num.size() == MAX_NUMBER_LEN + 1) {
             error("ERROR 2: Number too long.");
+            num.pop_back();
         }
         this->token = NUMBER;
         noReadMore = true;
@@ -151,8 +156,10 @@ unsigned char LexicalAnalyzer::getNextState3()
 {
     if(c == '=')
         this->token = GEQ;
-    else
+    else {
         this->token = GTR;
+        noReadMore = true;
+    }
 
     return ENDSTATE;
 }
@@ -163,8 +170,10 @@ unsigned char LexicalAnalyzer::getNextState4()
         this->token = NEQ;
     else if(c == '=')
         this->token = LEQ;
-    else
+    else {
         this->token = LSS;
+        noReadMore = true;
+    }
 
     return ENDSTATE;
 }
@@ -175,7 +184,8 @@ unsigned char LexicalAnalyzer::getNextState5()
         this->token = ASSIGN;
     else {
         error("ERROR 3: Invalid symbols.");
-        this->token = NONE;
+        noReadMore = true;
+        return 0;
     }
 
     return ENDSTATE;

@@ -1,0 +1,26 @@
+Input: Nhập giá trị vào màn hình '\n' tương đương với phím enter.
+Output: Giá trị hiển thị ra màn hình.
+
+test01: Compile is success. 
+	Input: 12\n8\n
+	Output: 4\n0\n1\n2\n3\n4\n5\n6\n7\n8\n
+test02: Compile is success.
+	Input: 64\n48\n
+	Output: 16\n
+test03: Compile is success. 
+	Input: 1\n48\n
+	Output: 11\n
+	Input: 12\n48\n
+	Output: 12\n
+test04: Compile is success. 
+	Input: 15\n24\n2\n6\n7\n
+	Output: 15\n24\n2\n6\n7\n4\n
+test05: Compile is success. 
+	Input: No input
+	Output: 6\n
+test06: Compile is success. 
+	Input: No input
+	Output: 1\n2\n3\n4\n5\n6\n7\n8\n9\n
+test07: Compile is success. 
+	Input: No input
+	Output: -10\n

@@ -1,0 +1,15 @@
+Program Example1;
+
+Procedure k(a; k);
+	Begin
+	End;
+
+Procedure test01(a; a; var d);
+	Begin
+	End;
+Begin
+End.
+
+
+
+.

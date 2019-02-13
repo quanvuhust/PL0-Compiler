@@ -1,0 +1,55 @@
+j 26
+int 7
+lv 0, 4
+lv 0, 5
+ne
+fj 22
+lv 0, 4
+lv 0, 5
+gt
+fj 16
+la 0, 4
+lv 0, 4
+lv 0, 5
+sub
+st
+j 21
+la 0, 5
+lv 0, 5
+lv 0, 4
+sub
+st
+j 2
+lv 0, 6
+lv 0, 5
+st
+ep
+int 7
+j 31
+int 5
+ri
+ep
+int 4
+la 0, 0
+dct 5
+call 0, 28
+int 4
+la 0, 1
+dct 5
+call 0, 28
+int 4
+lv 0, 0
+lv 0, 1
+la 0, 2
+dct 7
+call 0, 1
+j 50
+int 5
+wri
+wln
+ep
+int 4
+lv 0, 2
+dct 5
+call 0, 46
+hlt

@@ -1,0 +1,39 @@
+int 6
+la 0, 1
+lc 0
+st
+la 0, 0
+lc 33
+st
+la 0, 0
+cv
+lc 0
+st
+cv
+li
+lc 5
+le
+fj 28
+la 0, 1
+lv 0, 1
+lc 1
+add
+st
+cv
+cv
+li
+lc 1
+add
+st
+j 11
+dct 1
+j 34
+int 5
+wri
+wln
+ep
+int 4
+lv 0, 0
+dct 5
+call 0, 30
+hlt

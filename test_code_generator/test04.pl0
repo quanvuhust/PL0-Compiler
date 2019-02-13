@@ -1,0 +1,25 @@
+Program Example4; 
+CONST N = 3;
+Var a[3], b[2], i, c;
+
+
+Procedure Test1(Var i);
+    Begin
+        For i:=0 To 3 Do
+            c := 5;
+    End;
+
+Begin
+	For i:=0 To N-1 Do
+		Call Readln(a[i]);
+	For i:=0 To 1 Do
+		Call Readln(b[i]);
+
+    For i:=0 To N-1 Do
+        Call Writeln(a[i]);
+	For i:=0 To 1 Do
+        Call Writeln(b[i]);
+		
+    Call Test1(i);
+    Call Writeln(i);
+End.

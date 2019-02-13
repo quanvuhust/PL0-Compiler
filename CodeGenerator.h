@@ -7,7 +7,8 @@ class CodeGenerator
 {
 public:
     CodeGenerator();
-    int lvalue(VarEntry* entry, int base);
+    void rvalue(VarEntry* entry, int base);
+    void lvalue(VarEntry* entry, int base);
     void gen(OpCode opCode);
     void gen(OpCode opCode, int p);
     void gen(OpCode opCode, int p, int q);

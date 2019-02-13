@@ -1,0 +1,185 @@
+j 87
+j 13
+int 6
+la 0, 5
+lc 1
+st
+lv 0, 4
+lv 0, 4
+li
+lv 0, 5
+sub
+st
+ep
+j 79
+j 26
+int 5
+la 2, 7
+lc 2
+st
+lv 0, 4
+lv 0, 4
+li
+lv 2, 7
+sub
+st
+ep
+int 7
+int 4
+la 0, 4
+dct 5
+call 1, 2
+int 4
+la 0, 5
+dct 5
+call 0, 15
+la 0, 4
+lv 0, 4
+lv 1, 7
+sub
+st
+la 0, 4
+lv 0, 4
+lc 2
+add
+st
+la 0, 5
+lv 0, 5
+lc 3
+sub
+st
+la 0, 5
+lv 0, 5
+lc 3
+add
+st
+lv 0, 4
+lv 0, 5
+ne
+fj 75
+lv 0, 4
+lv 0, 5
+gt
+fj 69
+la 0, 4
+lv 0, 4
+lv 0, 5
+sub
+st
+j 74
+la 0, 5
+lv 0, 5
+lv 0, 4
+sub
+st
+j 55
+lv 0, 6
+lv 0, 5
+st
+ep
+int 8
+int 4
+lv 0, 4
+lv 0, 5
+lv 0, 6
+dct 7
+call 0, 14
+ep
+int 17
+j 92
+int 5
+ri
+ep
+int 4
+la 0, 0
+dct 5
+call 0, 89
+int 4
+la 0, 1
+dct 5
+call 0, 89
+la 0, 0
+lv 0, 0
+lc 1
+add
+st
+la 0, 1
+lv 0, 1
+lc 2
+add
+st
+int 4
+lv 0, 0
+lv 0, 1
+la 0, 2
+dct 7
+call 0, 1
+j 121
+int 5
+wri
+wln
+ep
+int 4
+lv 0, 2
+dct 5
+call 0, 117
+la 0, 12
+cv
+lc 0
+st
+cv
+li
+lc 9
+lc 1
+sub
+le
+fj 152
+la 0, 3
+lc 2
+lc 2
+sub
+lv 0, 12
+add
+add
+lv 0, 12
+st
+cv
+cv
+li
+lc 1
+add
+st
+j 129
+dct 1
+la 0, 12
+cv
+lc 0
+st
+cv
+li
+lc 9
+lc 1
+sub
+le
+fj 183
+int 4
+la 0, 3
+lv 0, 12
+la 0, 3
+lc 0
+add
+li
+add
+add
+li
+dct 5
+call 0, 117
+cv
+cv
+li
+lc 1
+add
+st
+j 157
+dct 1
+hlt

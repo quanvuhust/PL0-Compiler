@@ -14,8 +14,10 @@ int main(int argc, char* argv[]) {
         return 1;
     }*/
     Parser parser;
-    parser.parse("./test/test00.pl0");
-    VM vm;
-    vm.intepreter("./test/test00.out");
+    if(!parser.parse("./test/test01.pl0")) {
+        VM vm;
+        vm.intepreter("./test/test01.out");
+    }
+
     return 0;
 }

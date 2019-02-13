@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -43,10 +44,10 @@ int VM::loadCode(const char* input)
 
             while (getline(iss, token, ',')) {
                 if(c == 0) {
-                    i.p = stoi(token);
+                    i.p = atoi(token.c_str());
                     c++;
                 } else if(c == 1) {
-                    i.q = stoi(token);
+                    i.q = atoi(token.c_str());
                     c++;
                 } else {
                     cerr << "Op " << token << " have too many operand." << endl;

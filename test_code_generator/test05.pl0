@@ -1,0 +1,11 @@
+Program Example5;
+Var i, n;
+
+Begin  
+	n := 0;
+	i := 33;
+    For i:=0 To 5 Do
+        n := n + 1;
+
+    Call Writeln(i);
+End.
